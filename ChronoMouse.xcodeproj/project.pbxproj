@@ -1,0 +1,364 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		15C794E82A7AAFEE00C420FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C794E72A7AAFEE00C420FE /* AppDelegate.swift */; };
+		15C794EC2A7AAFF100C420FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15C794EB2A7AAFF100C420FE /* Assets.xcassets */; };
+		15C795132A7ACB2500C420FE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C795122A7ACB2500C420FE /* main.swift */; };
+		15C795202A7ADF2100C420FE /* ChronoMouse256.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C795192A7ADF2000C420FE /* ChronoMouse256.png */; };
+		15C795212A7ADF2100C420FE /* ChronoMouse128.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C7951A2A7ADF2000C420FE /* ChronoMouse128.png */; };
+		15C795222A7ADF2100C420FE /* ChronoMouse32.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C7951B2A7ADF2000C420FE /* ChronoMouse32.png */; };
+		15C795232A7ADF2100C420FE /* ChronoMouse512.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C7951C2A7ADF2000C420FE /* ChronoMouse512.png */; };
+		15C795242A7ADF2100C420FE /* ChronoMouse64.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C7951D2A7ADF2000C420FE /* ChronoMouse64.png */; };
+		15C795252A7ADF2100C420FE /* ChronoMouse1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C7951E2A7ADF2100C420FE /* ChronoMouse1024.png */; };
+		15C795262A7ADF2100C420FE /* ChronoMouse16.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C7951F2A7ADF2100C420FE /* ChronoMouse16.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		15C794E42A7AAFEE00C420FE /* ChronoMouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChronoMouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		15C794E72A7AAFEE00C420FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		15C794EB2A7AAFF100C420FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		15C794F02A7AAFF100C420FE /* ChronoMouse.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChronoMouse.entitlements; sourceTree = "<group>"; };
+		15C795122A7ACB2500C420FE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		15C795192A7ADF2000C420FE /* ChronoMouse256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChronoMouse256.png; sourceTree = "<group>"; };
+		15C7951A2A7ADF2000C420FE /* ChronoMouse128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChronoMouse128.png; sourceTree = "<group>"; };
+		15C7951B2A7ADF2000C420FE /* ChronoMouse32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChronoMouse32.png; sourceTree = "<group>"; };
+		15C7951C2A7ADF2000C420FE /* ChronoMouse512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChronoMouse512.png; sourceTree = "<group>"; };
+		15C7951D2A7ADF2000C420FE /* ChronoMouse64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChronoMouse64.png; sourceTree = "<group>"; };
+		15C7951E2A7ADF2100C420FE /* ChronoMouse1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChronoMouse1024.png; sourceTree = "<group>"; };
+		15C7951F2A7ADF2100C420FE /* ChronoMouse16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChronoMouse16.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		15C794E12A7AAFEE00C420FE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		15C794DB2A7AAFEE00C420FE = {
+			isa = PBXGroup;
+			children = (
+				15C795122A7ACB2500C420FE /* main.swift */,
+				15C7951F2A7ADF2100C420FE /* ChronoMouse16.png */,
+				15C7951B2A7ADF2000C420FE /* ChronoMouse32.png */,
+				15C7951D2A7ADF2000C420FE /* ChronoMouse64.png */,
+				15C7951A2A7ADF2000C420FE /* ChronoMouse128.png */,
+				15C795192A7ADF2000C420FE /* ChronoMouse256.png */,
+				15C7951C2A7ADF2000C420FE /* ChronoMouse512.png */,
+				15C7951E2A7ADF2100C420FE /* ChronoMouse1024.png */,
+				15C794E62A7AAFEE00C420FE /* ChronoMouse */,
+				15C794E52A7AAFEE00C420FE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		15C794E52A7AAFEE00C420FE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				15C794E42A7AAFEE00C420FE /* ChronoMouse.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		15C794E62A7AAFEE00C420FE /* ChronoMouse */ = {
+			isa = PBXGroup;
+			children = (
+				15C794E72A7AAFEE00C420FE /* AppDelegate.swift */,
+				15C794EB2A7AAFF100C420FE /* Assets.xcassets */,
+				15C794F02A7AAFF100C420FE /* ChronoMouse.entitlements */,
+			);
+			path = ChronoMouse;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		15C794E32A7AAFEE00C420FE /* ChronoMouse */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 15C795092A7AAFF100C420FE /* Build configuration list for PBXNativeTarget "ChronoMouse" */;
+			buildPhases = (
+				15C794E02A7AAFEE00C420FE /* Sources */,
+				15C794E12A7AAFEE00C420FE /* Frameworks */,
+				15C794E22A7AAFEE00C420FE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChronoMouse;
+			productName = ChronoMouse;
+			productReference = 15C794E42A7AAFEE00C420FE /* ChronoMouse.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		15C794DC2A7AAFEE00C420FE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					15C794E32A7AAFEE00C420FE = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 15C794DF2A7AAFEE00C420FE /* Build configuration list for PBXProject "ChronoMouse" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 15C794DB2A7AAFEE00C420FE;
+			productRefGroup = 15C794E52A7AAFEE00C420FE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				15C794E32A7AAFEE00C420FE /* ChronoMouse */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		15C794E22A7AAFEE00C420FE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15C795242A7ADF2100C420FE /* ChronoMouse64.png in Resources */,
+				15C795232A7ADF2100C420FE /* ChronoMouse512.png in Resources */,
+				15C795202A7ADF2100C420FE /* ChronoMouse256.png in Resources */,
+				15C795222A7ADF2100C420FE /* ChronoMouse32.png in Resources */,
+				15C795262A7ADF2100C420FE /* ChronoMouse16.png in Resources */,
+				15C795212A7ADF2100C420FE /* ChronoMouse128.png in Resources */,
+				15C794EC2A7AAFF100C420FE /* Assets.xcassets in Resources */,
+				15C795252A7ADF2100C420FE /* ChronoMouse1024.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		15C794E02A7AAFEE00C420FE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15C795132A7ACB2500C420FE /* main.swift in Sources */,
+				15C794E82A7AAFEE00C420FE /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		15C795072A7AAFF100C420FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		15C795082A7AAFF100C420FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		15C7950A2A7AAFF100C420FE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = ChronoMouse/ChronoMouse.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = "";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sryo.ChronoMouse;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		15C7950B2A7AAFF100C420FE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_ENTITLEMENTS = ChronoMouse/ChronoMouse.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = "";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sryo.ChronoMouse;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		15C794DF2A7AAFEE00C420FE /* Build configuration list for PBXProject "ChronoMouse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15C795072A7AAFF100C420FE /* Debug */,
+				15C795082A7AAFF100C420FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		15C795092A7AAFF100C420FE /* Build configuration list for PBXNativeTarget "ChronoMouse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15C7950A2A7AAFF100C420FE /* Debug */,
+				15C7950B2A7AAFF100C420FE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 15C794DC2A7AAFEE00C420FE /* Project object */;
+}
