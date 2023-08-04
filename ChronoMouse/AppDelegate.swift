@@ -20,6 +20,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var isCharging: Bool = false
     let edgeMargin: CGFloat = 4.0
     let radius: CGFloat = 30.0
+    var optionKeyDown: Bool = false
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         NSApp.setActivationPolicy(.accessory)
@@ -47,26 +48,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSEvent.addGlobalMonitorForEvents(matching: [.keyDown, .leftMouseDragged]) { (event) in
             self.fadeOut()
         }
+
+        NSEvent.addGlobalMonitorForEvents(matching: .flagsChanged) { (event) in
+            let flags = event.modifierFlags
+            self.optionKeyDown = flags.contains(.option)
+        }
     }
 
     @objc func update() {
         let time = Date()
         let calendar = Calendar.current
         let minute = calendar.component(.minute, from: time)
+        let hour = calendar.component(.hour, from: time)
 
         let angle = -Double(minute) * (2.0 * .pi / 60.0) + .pi/2
         let mouseLocation = NSEvent.mouseLocation
 
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH"
-        let formattedHour = formatter.string(from: time)
+        let formattedTime = optionKeyDown ? String(format: "%02d", minute) : String(format: "%02d", hour)
 
-
-        self.textView.string = formattedHour
+        self.textView.string = formattedTime
         self.textView.textColor = (self.currentBatteryLevel <= 30 && !self.isCharging) ? NSColor.red : NSColor.white
 
         let attributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font: self.textView.font!]
-        let attributedText = NSAttributedString(string: formattedHour, attributes: attributes)
+        let attributedText = NSAttributedString(string: formattedTime, attributes: attributes)
         let textRect = attributedText.boundingRect(with: NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin)
 
         var x = mouseLocation.x + radius * CGFloat(cos(angle)) - textRect.width / 2
