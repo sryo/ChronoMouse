@@ -1,31 +1,31 @@
 import Cocoa
 import IOKit.ps
 
-class BatteryRingView: NSView {
+class BatteryBarView: NSView {
     var batteryLevel: Double = 100.0
-    var textShadow: NSShadow?
-    var ringShadow: NSShadow?
-    
+    var barShadow: NSShadow?
+    let barHeight: CGFloat = 8.0
+    let barPadding: CGFloat = 6.0
+
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
-        guard batteryLevel < 30 else { return }
-        
+
+        let barYPosition = bounds.height - barHeight - 20
+        let outerRect = NSRect(x: bounds.origin.x + barPadding, y: barYPosition, width: bounds.width - barPadding * 2, height: barHeight)
+        let batteryPath = NSBezierPath(roundedRect: outerRect, xRadius: 2, yRadius: 2)
+        batteryPath.lineWidth = 1.0
         NSColor.white.setStroke()
-        
-        let batteryPath = NSBezierPath()
-        batteryPath.lineWidth = 2.0
-        
-        let startAngle = 90.0
-        let endAngle = startAngle + (batteryLevel / 100.0) * 360.0
-        let radius = min(bounds.width, bounds.height) / 3 - 6
-        batteryPath.appendArc(withCenter: NSPoint(x: bounds.midX, y: bounds.midY), radius: radius, startAngle: CGFloat(startAngle), endAngle: CGFloat(endAngle), clockwise: false)
-        
-        NSGraphicsContext.saveGraphicsState()
-        if let ringShadow = ringShadow {
-            ringShadow.set()
+        if let barShadow = barShadow {
+            barShadow.set()
         }
         batteryPath.stroke()
-        NSGraphicsContext.restoreGraphicsState()
+
+        let innerRect = NSInsetRect(outerRect, 2, 2)
+        NSBezierPath(roundedRect: innerRect, xRadius: 1, yRadius: 1).addClip()
+
+        let fillWidth = CGFloat(batteryLevel / 100.0) * innerRect.width
+        NSColor.white.setFill()
+        NSBezierPath(rect: NSRect(x: innerRect.origin.x, y: innerRect.origin.y, width: fillWidth, height: innerRect.height)).fill()
     }
 }
 
@@ -49,17 +49,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let edgeMargin: CGFloat = 0
     let radius: CGFloat = 30.0
     var optionKeyDown: Bool = false
-    var batteryRingView: BatteryRingView!
-        
+    var batteryBarView: BatteryBarView!
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         NSApp.setActivationPolicy(.accessory)
-        window = MouseTracker(contentRect: NSRect(x: 0, y: 0, width: 60, height: 60), styleMask: .borderless, backing: .buffered, defer: false)
-        textView = NSTextView(frame: NSRect(x: 10, y: 20, width: 40, height: 20))
+        window = MouseTracker(contentRect: NSRect(x: 0, y: 0, width: 40, height: 40), styleMask: .borderless, backing: .buffered, defer: false)
+        textView = NSTextView(frame: NSRect(x: 0, y: 0, width: 40, height: 20))
         textView.backgroundColor = NSColor.clear
         textView.font = NSFont.systemFont(ofSize: 16)
-
-        batteryRingView = BatteryRingView(frame: NSRect(x: 0, y: 0, width: 60, height: 60))
-        batteryRingView.addSubview(textView)
+        textView.alignment = .center
 
         let textShadow = NSShadow()
         textShadow.shadowColor = NSColor.black
@@ -67,15 +65,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         textShadow.shadowOffset = NSSize(width: 0, height: 1)
         textView.shadow = textShadow
         
-        let ringShadow = NSShadow()
-        ringShadow.shadowColor = NSColor.black
-        ringShadow.shadowBlurRadius = 2
-        ringShadow.shadowOffset = NSSize(width: 0, height: -1)
-        batteryRingView.ringShadow = ringShadow
-        window.contentView?.addSubview(batteryRingView)
+        batteryBarView = BatteryBarView(frame: NSRect(x: 0, y: 0, width: 40, height: 40))
+        window.contentView?.addSubview(batteryBarView)
+        batteryBarView.addSubview(textView)
+        
+        let barShadow = NSShadow()
+        barShadow.shadowColor = NSColor.black
+        barShadow.shadowBlurRadius = 2
+        barShadow.shadowOffset = NSSize(width: 0, height: -1)
+        batteryBarView.barShadow = barShadow
+        window.contentView?.addSubview(batteryBarView)
         window.makeKeyAndOrderFront(nil)
-
-        timer = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(updateBatteryStatus), userInfo: nil, repeats: true)
 
         NSEvent.addGlobalMonitorForEvents(matching: .mouseMoved) { (event) in
             self.window.alphaValue = 1.0
@@ -88,7 +88,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         timer = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(updateBatteryStatus), userInfo: nil, repeats: true)
 
-        // Immediately update the battery status
         updateBatteryStatus()
 
         NSEvent.addGlobalMonitorForEvents(matching: .flagsChanged) { (event) in
@@ -96,32 +95,37 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.optionKeyDown = flags.contains(.option)
         }
 
-        // Call update to position everything correctly at startup
         update()
     }
 
     @objc func update() {
-        let time = Date()
-        let calendar = Calendar.current
-        let minute = calendar.component(.minute, from: time)
-        let hour = calendar.component(.hour, from: time)
-        batteryRingView.batteryLevel = currentBatteryLevel
-        batteryRingView.needsDisplay = true
-        
-        let angle = -Double(minute) * (2.0 * .pi / 60.0) + .pi / 2
-        let mouseLocation = NSEvent.mouseLocation
+            let time = Date()
+            let calendar = Calendar.current
+            let minute = calendar.component(.minute, from: time)
+            let hour = calendar.component(.hour, from: time)
+            batteryBarView.batteryLevel = currentBatteryLevel
+            batteryBarView.needsDisplay = true
 
-        let formattedTime = optionKeyDown ? String(format: "%02d", minute) : String(format: "%02d", hour)
-        textView.string = formattedTime
+            let angle = -Double(minute) * (2.0 * .pi / 60.0) + .pi / 2
+            let mouseLocation = NSEvent.mouseLocation
+
+            let formattedTime = optionKeyDown ? String(format: "%02d", minute) : String(format: "%02d", hour)
+            textView.string = formattedTime
+
+            let textWidth = (formattedTime as NSString).size(withAttributes: [NSAttributedString.Key.font: NSFont.systemFont(ofSize: 16)]).width + 10 // Adding extra padding
+            let barYPosition = textView.frame.height + 4
+            textView.frame = NSRect(x: 0, y: batteryBarView.bounds.height - textView.frame.height, width: textWidth, height: textView.bounds.height)
+            batteryBarView.frame = NSRect(x: (batteryBarView.superview?.bounds.width ?? 40) / 2 - textWidth / 2, y: 0, width: textWidth, height: batteryBarView.bounds.height)
+                
         textView.textColor = (self.currentBatteryLevel <= 10 && !self.isCharging) ? NSColor.red : NSColor.white
         textView.alignment = .center
 
-        var x = mouseLocation.x + radius * CGFloat(cos(angle)) - batteryRingView.bounds.width / 2
-        var y = mouseLocation.y + radius * CGFloat(sin(angle)) - batteryRingView.bounds.height / 2
+        var x = mouseLocation.x + radius * CGFloat(cos(angle)) - batteryBarView.bounds.width / 2
+        var y = mouseLocation.y + radius * CGFloat(sin(angle)) - batteryBarView.bounds.height / 2
 
         let screenFrame = NSScreen.main?.frame ?? NSRect.zero
-        x = max(edgeMargin, min(x, screenFrame.width - batteryRingView.bounds.width - edgeMargin))
-        y = max(edgeMargin, min(y, screenFrame.height - batteryRingView.bounds.height - edgeMargin))
+        x = max(edgeMargin, min(x, screenFrame.width - batteryBarView.bounds.width - edgeMargin))
+        y = max(edgeMargin, min(y, screenFrame.height - batteryBarView.bounds.height - edgeMargin))
 
         window.setFrameOrigin(NSPoint(x: x, y: y))
         perform(#selector(fadeOut), with: nil, afterDelay: 2.0)
