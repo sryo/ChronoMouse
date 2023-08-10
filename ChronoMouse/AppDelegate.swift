@@ -3,29 +3,36 @@ import IOKit.ps
 
 class BatteryBarView: NSView {
     var batteryLevel: Double = 100.0
+    var isCharging: Bool = false
     var barShadow: NSShadow?
     let barHeight: CGFloat = 8.0
     let barPadding: CGFloat = 6.0
 
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
-
-        let barYPosition = bounds.height - barHeight - 20
+        guard batteryLevel < 30 && !isCharging else { return }
+        
+        let barYPosition = bounds.height - barHeight - 22
         let outerRect = NSRect(x: bounds.origin.x + barPadding, y: barYPosition, width: bounds.width - barPadding * 2, height: barHeight)
-        let batteryPath = NSBezierPath(roundedRect: outerRect, xRadius: 2, yRadius: 2)
-        batteryPath.lineWidth = 1.0
-        NSColor.white.setStroke()
-        if let barShadow = barShadow {
-            barShadow.set()
-        }
-        batteryPath.stroke()
-
         let innerRect = NSInsetRect(outerRect, 2, 2)
-        NSBezierPath(roundedRect: innerRect, xRadius: 1, yRadius: 1).addClip()
-
         let fillWidth = CGFloat(batteryLevel / 100.0) * innerRect.width
+
+        let image = NSImage(size: bounds.size)
+        image.lockFocus()
+
+        barShadow?.set()
+        let outerPath = NSBezierPath(roundedRect: outerRect, xRadius: 2, yRadius: 2)
+        NSColor.white.setStroke()
+        outerPath.lineWidth = 1.0
+        outerPath.stroke()
+
+        let innerPath = NSBezierPath(roundedRect: NSRect(x: innerRect.origin.x, y: innerRect.origin.y, width: fillWidth, height: innerRect.height), xRadius: 1, yRadius: 1)
         NSColor.white.setFill()
-        NSBezierPath(rect: NSRect(x: innerRect.origin.x, y: innerRect.origin.y, width: fillWidth, height: innerRect.height)).fill()
+        innerPath.fill()
+
+        image.unlockFocus()
+
+        image.draw(at: .zero, from: bounds, operation: .copy, fraction: 1.0)
     }
 }
 
@@ -37,6 +44,7 @@ class MouseTracker: NSWindow {
         backgroundColor = NSColor.clear
         isOpaque = false
         hasShadow = false
+        ignoresMouseEvents = true
     }
 }
 
@@ -53,10 +61,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         NSApp.setActivationPolicy(.accessory)
-        window = MouseTracker(contentRect: NSRect(x: 0, y: 0, width: 40, height: 40), styleMask: .borderless, backing: .buffered, defer: false)
+        window = MouseTracker(contentRect: NSRect(x: 0, y: 0, width: 30, height: 40), styleMask: .borderless, backing: .buffered, defer: false)
         textView = NSTextView(frame: NSRect(x: 0, y: 0, width: 40, height: 20))
         textView.backgroundColor = NSColor.clear
-        textView.font = NSFont.systemFont(ofSize: 16)
+        textView.font = NSFont.systemFont(ofSize: 18)
         textView.alignment = .center
 
         let textShadow = NSShadow()
@@ -104,6 +112,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let minute = calendar.component(.minute, from: time)
             let hour = calendar.component(.hour, from: time)
             batteryBarView.batteryLevel = currentBatteryLevel
+            batteryBarView.isCharging = isCharging
             batteryBarView.needsDisplay = true
 
             let angle = -Double(minute) * (2.0 * .pi / 60.0) + .pi / 2
@@ -112,7 +121,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let formattedTime = optionKeyDown ? String(format: "%02d", minute) : String(format: "%02d", hour)
             textView.string = formattedTime
 
-            let textWidth = (formattedTime as NSString).size(withAttributes: [NSAttributedString.Key.font: NSFont.systemFont(ofSize: 16)]).width + 10 // Adding extra padding
+            let textWidth = (formattedTime as NSString).size(withAttributes: [NSAttributedString.Key.font: NSFont.systemFont(ofSize: 18)]).width + 10
             let barYPosition = textView.frame.height + 4
             textView.frame = NSRect(x: 0, y: batteryBarView.bounds.height - textView.frame.height, width: textWidth, height: textView.bounds.height)
             batteryBarView.frame = NSRect(x: (batteryBarView.superview?.bounds.width ?? 40) / 2 - textWidth / 2, y: 0, width: textWidth, height: batteryBarView.bounds.height)
@@ -121,7 +130,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         textView.alignment = .center
 
         var x = mouseLocation.x + radius * CGFloat(cos(angle)) - batteryBarView.bounds.width / 2
-        var y = mouseLocation.y + radius * CGFloat(sin(angle)) - batteryBarView.bounds.height / 2
+        var y = mouseLocation.y + radius * CGFloat(sin(angle)) - textView.frame.height * 1.25
 
         let screenFrame = NSScreen.main?.frame ?? NSRect.zero
         x = max(edgeMargin, min(x, screenFrame.width - batteryBarView.bounds.width - edgeMargin))
