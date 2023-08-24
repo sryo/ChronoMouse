@@ -5,6 +5,10 @@
 # ChronoMouse: A Handy Clock for Your Cursor
 ChronoMouse is a utility designed to simplify time tracking during your digital workflow. It achieves this by displaying a moving clock adjacent to your mouse cursor, ensuring that the current time is always in your field of view.
 
+Here's an image worth admiring:
+
+![screenshot](https://github.com/sryo/ChronoMouse/assets/46853/d92f96ee-12b1-4a7f-8444-b6dae4afa537)
+
 In addition, ChronoMouse helps monitor your device's battery level, with the time display color switching to red when the battery charge is low.
 
 ## Using ChronoMouse
