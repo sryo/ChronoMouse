@@ -107,34 +107,35 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func update() {
-            let time = Date()
-            let calendar = Calendar.current
-            let minute = calendar.component(.minute, from: time)
-            let hour = calendar.component(.hour, from: time)
-            batteryBarView.batteryLevel = currentBatteryLevel
-            batteryBarView.isCharging = isCharging
-            batteryBarView.needsDisplay = true
+        let time = Date()
+        let calendar = Calendar.current
+        let minute = calendar.component(.minute, from: time)
+        let hour = calendar.component(.hour, from: time)
+        batteryBarView.batteryLevel = currentBatteryLevel
+        batteryBarView.isCharging = isCharging
+        batteryBarView.needsDisplay = true
 
-            let angle = -Double(minute) * (2.0 * .pi / 60.0) + .pi / 2
-            let mouseLocation = NSEvent.mouseLocation
+        let angle = -Double(minute) * (2.0 * .pi / 60.0) + .pi / 2
+        let mouseLocation = NSEvent.mouseLocation
 
-            let formattedTime = optionKeyDown ? String(format: "%02d", minute) : String(format: "%02d", hour)
-            textView.string = formattedTime
+        let formattedTime = optionKeyDown ? String(format: "%02d", minute) : String(format: "%02d", hour)
+        textView.string = formattedTime
 
-            let textWidth = (formattedTime as NSString).size(withAttributes: [NSAttributedString.Key.font: NSFont.systemFont(ofSize: 18)]).width + 10
-            let barYPosition = textView.frame.height + 4
-            textView.frame = NSRect(x: 0, y: batteryBarView.bounds.height - textView.frame.height, width: textWidth, height: textView.bounds.height)
-            batteryBarView.frame = NSRect(x: (batteryBarView.superview?.bounds.width ?? 40) / 2 - textWidth / 2, y: 0, width: textWidth, height: batteryBarView.bounds.height)
-                
+        let textWidth = (formattedTime as NSString).size(withAttributes: [NSAttributedString.Key.font: NSFont.systemFont(ofSize: 18)]).width + 10
+        let barYPosition = textView.frame.height + 4
+        textView.frame = NSRect(x: 0, y: batteryBarView.bounds.height - textView.frame.height, width: textWidth, height: textView.bounds.height)
+        batteryBarView.frame = NSRect(x: (batteryBarView.superview?.bounds.width ?? 40) / 2 - textWidth / 2, y: 0, width: textWidth, height: batteryBarView.bounds.height)
+        
         textView.textColor = (self.currentBatteryLevel <= 10 && !self.isCharging) ? NSColor.red : NSColor.white
         textView.alignment = .center
 
         var x = mouseLocation.x + radius * CGFloat(cos(angle)) - batteryBarView.bounds.width / 2
         var y = mouseLocation.y + radius * CGFloat(sin(angle)) - textView.frame.height * 1.25
 
-        let screenFrame = NSScreen.main?.frame ?? NSRect.zero
-        x = max(edgeMargin, min(x, screenFrame.width - batteryBarView.bounds.width - edgeMargin))
-        y = max(edgeMargin, min(y, screenFrame.height - batteryBarView.bounds.height - edgeMargin))
+        let screen = NSScreen.screens.first { NSMouseInRect(mouseLocation, $0.frame, false) } ?? NSScreen.main!
+        let screenFrame = screen.frame
+        x = max(screenFrame.minX + edgeMargin, min(x, screenFrame.maxX - batteryBarView.bounds.width - edgeMargin))
+        y = max(screenFrame.minY + edgeMargin, min(y, screenFrame.maxY - batteryBarView.bounds.height - edgeMargin))
 
         window.setFrameOrigin(NSPoint(x: x, y: y))
         perform(#selector(fadeOut), with: nil, afterDelay: 2.0)
