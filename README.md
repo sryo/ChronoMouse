@@ -1,6 +1,4 @@
-<div align="center">
-<img src="https://raw.githubusercontent.com/sryo/ChronoMouse/6c4cf295a427a9523bb476255986a4d29750a071/ChronoMouse/Assets.xcassets/AppIcon.appiconset/ChronoMouse256.png" alt="logo"></img>
-</div>
+![chronomouse](https://github.com/user-attachments/assets/2950afcd-9b2f-4b40-ad24-df13d8a98d74)
 
 # ChronoMouse: A Handy Clock for Your Cursor
 ChronoMouse is a utility designed to simplify time tracking during your digital workflow. It achieves this by displaying a moving clock adjacent to your mouse cursor, ensuring that the current time is always in your field of view.
