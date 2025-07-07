@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		15C794E82A7AAFEE00C420FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C794E72A7AAFEE00C420FE /* AppDelegate.swift */; };
 		15C794EC2A7AAFF100C420FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15C794EB2A7AAFF100C420FE /* Assets.xcassets */; };
 		15C795132A7ACB2500C420FE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C795122A7ACB2500C420FE /* main.swift */; };
 		15C795202A7ADF2100C420FE /* ChronoMouse256.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C795192A7ADF2000C420FE /* ChronoMouse256.png */; };
@@ -21,10 +20,9 @@
 
 /* Begin PBXFileReference section */
 		15C794E42A7AAFEE00C420FE /* ChronoMouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChronoMouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		15C794E72A7AAFEE00C420FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		15C794EB2A7AAFF100C420FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		15C794F02A7AAFF100C420FE /* ChronoMouse.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChronoMouse.entitlements; sourceTree = "<group>"; };
-		15C795122A7ACB2500C420FE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		15C794EB2A7AAFF100C420FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Assets.xcassets; sourceTree = "<group>"; };
+		15C794F02A7AAFF100C420FE /* ChronoMouse.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ChronoMouse.entitlements; path = ChronoMouse.entitlements; sourceTree = "<group>"; };
+		15C795122A7ACB2500C420FE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = main.swift; path = main.swift; sourceTree = "<group>"; };
 		15C795192A7ADF2000C420FE /* ChronoMouse256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChronoMouse256.png; sourceTree = "<group>"; };
 		15C7951A2A7ADF2000C420FE /* ChronoMouse128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChronoMouse128.png; sourceTree = "<group>"; };
 		15C7951B2A7ADF2000C420FE /* ChronoMouse32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChronoMouse32.png; sourceTree = "<group>"; };
@@ -56,7 +54,8 @@
 				15C795192A7ADF2000C420FE /* ChronoMouse256.png */,
 				15C7951C2A7ADF2000C420FE /* ChronoMouse512.png */,
 				15C7951E2A7ADF2100C420FE /* ChronoMouse1024.png */,
-				15C794E62A7AAFEE00C420FE /* ChronoMouse */,
+				15C794EB2A7AAFF100C420FE /* Assets.xcassets */,
+				15C794F02A7AAFF100C420FE /* ChronoMouse.entitlements */,
 				15C794E52A7AAFEE00C420FE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -67,16 +66,6 @@
 				15C794E42A7AAFEE00C420FE /* ChronoMouse.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		15C794E62A7AAFEE00C420FE /* ChronoMouse */ = {
-			isa = PBXGroup;
-			children = (
-				15C794E72A7AAFEE00C420FE /* AppDelegate.swift */,
-				15C794EB2A7AAFF100C420FE /* Assets.xcassets */,
-				15C794F02A7AAFF100C420FE /* ChronoMouse.entitlements */,
-			);
-			path = ChronoMouse;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,7 +145,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				15C795132A7ACB2500C420FE /* main.swift in Sources */,
-				15C794E82A7AAFEE00C420FE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,7 +275,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = ChronoMouse/ChronoMouse.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ChronoMouse.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -315,7 +303,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = ChronoMouse/ChronoMouse.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ChronoMouse.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
