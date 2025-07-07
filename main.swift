@@ -106,39 +106,42 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         update()
     }
 
-    @objc func update() {
+    func update() {
         let time = Date()
         let calendar = Calendar.current
         let minute = calendar.component(.minute, from: time)
         let hour = calendar.component(.hour, from: time)
-        batteryBarView.batteryLevel = currentBatteryLevel
-        batteryBarView.isCharging = isCharging
-        batteryBarView.needsDisplay = true
+        self.batteryBarView.batteryLevel = self.currentBatteryLevel
+        self.batteryBarView.isCharging = self.isCharging
+        self.batteryBarView.needsDisplay = true
 
-        let angle = -Double(minute) * (2.0 * .pi / 60.0) + .pi / 2
+        // Calculate the angle for the minute hand (0 minutes is straight up)
+        let angle = -Double(minute) * (2.0 * .pi / 60.0) + (.pi / 2.0)
         let mouseLocation = NSEvent.mouseLocation
 
-        let formattedTime = optionKeyDown ? String(format: "%02d", minute) : String(format: "%02d", hour)
-        textView.string = formattedTime
+        let formattedTime = self.optionKeyDown ? String(format: "%02d", minute) : String(format: "%02d", hour)
+        self.textView.string = formattedTime
 
         let textWidth = (formattedTime as NSString).size(withAttributes: [NSAttributedString.Key.font: NSFont.systemFont(ofSize: 18)]).width + 10
-        let barYPosition = textView.frame.height + 4
-        textView.frame = NSRect(x: 0, y: batteryBarView.bounds.height - textView.frame.height, width: textWidth, height: textView.bounds.height)
-        batteryBarView.frame = NSRect(x: (batteryBarView.superview?.bounds.width ?? 40) / 2 - textWidth / 2, y: 0, width: textWidth, height: batteryBarView.bounds.height)
+        // The text view is positioned within the batteryBarView
+        self.textView.frame = NSRect(x: 0, y: self.batteryBarView.bounds.height - self.textView.frame.height, width: textWidth, height: self.textView.bounds.height)
+        self.batteryBarView.frame = NSRect(x: (self.batteryBarView.superview?.bounds.width ?? 40) / 2 - textWidth / 2, y: 0, width: textWidth, height: self.batteryBarView.bounds.height)
 
-        textView.textColor = (self.currentBatteryLevel <= 10 && !self.isCharging) ? NSColor.red : NSColor.white
-        textView.alignment = .center
+        self.textView.textColor = (self.currentBatteryLevel <= 10 && !self.isCharging) ? NSColor.red : NSColor.white
+        self.textView.alignment = .center
 
-        var x = mouseLocation.x + radius * CGFloat(cos(angle)) - batteryBarView.bounds.width / 2
-        var y = mouseLocation.y + radius * CGFloat(sin(angle)) - textView.frame.height * 1.25
+        // Calculate the window's x and y position relative to the mouse cursor, offset by an angle determined by the current minute
+        var xPosition = mouseLocation.x + self.radius * CGFloat(cos(angle)) - self.batteryBarView.bounds.width / 2
+        var yPosition = mouseLocation.y + self.radius * CGFloat(sin(angle)) - self.textView.frame.height * 1.25
 
+        // Ensure the window stays within screen bounds
         let screen = NSScreen.screens.first { NSMouseInRect(mouseLocation, $0.frame, false) } ?? NSScreen.main!
         let screenFrame = screen.frame
-        x = max(screenFrame.minX + edgeMargin, min(x, screenFrame.maxX - batteryBarView.bounds.width - edgeMargin))
-        y = max(screenFrame.minY + edgeMargin, min(y, screenFrame.maxY - batteryBarView.bounds.height - edgeMargin))
+        xPosition = max(screenFrame.minX + self.edgeMargin, min(xPosition, screenFrame.maxX - self.batteryBarView.bounds.width - self.edgeMargin))
+        yPosition = max(screenFrame.minY + self.edgeMargin, min(yPosition, screenFrame.maxY - self.batteryBarView.bounds.height - self.edgeMargin))
 
-        window.setFrameOrigin(NSPoint(x: x, y: y))
-        perform(#selector(fadeOut), with: nil, afterDelay: 2.0)
+        self.window.setFrameOrigin(NSPoint(x: xPosition, y: yPosition))
+        perform(#selector(fadeOut), with: nil, afterDelay: 2.0) // perform is an NSObject method, self is implicit
     }
 
     @objc func fadeOut() {
@@ -149,16 +152,31 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func updateBatteryStatus() {
-        let snapshot = IOPSCopyPowerSourcesInfo().takeRetainedValue()
-        let sources = IOPSCopyPowerSourcesList(snapshot).takeRetainedValue() as! [CFTypeRef]
+        guard let snapshot = IOPSCopyPowerSourcesInfo()?.takeRetainedValue(),
+              let sources = IOPSCopyPowerSourcesList(snapshot)?.takeRetainedValue() as? [CFTypeRef] else {
+            // Log an error or handle the inability to get power sources
+            print("Error: Could not retrieve power source information.")
+            return
+        }
+
         for source in sources {
-            if let description = IOPSGetPowerSourceDescription(snapshot, source).takeUnretainedValue() as? [String: Any] {
-                if let currentCapacity = description[kIOPSCurrentCapacityKey] as? Int,
-                   let maxCapacity = description[kIOPSMaxCapacityKey] as? Int,
-                   let isCharging = description[kIOPSIsChargingKey] as? Bool {
+            guard let description = IOPSGetPowerSourceDescription(snapshot, source)?.takeUnretainedValue() as? [String: Any] else {
+                continue
+            }
+
+            if let currentCapacity = description[kIOPSCurrentCapacityKey] as? Int,
+               let maxCapacity = description[kIOPSMaxCapacityKey] as? Int,
+               let isCharging = description[kIOPSIsChargingKey] as? Bool {
+                // Ensure maxCapacity is not zero to prevent division by zero
+                if maxCapacity > 0 {
                     self.currentBatteryLevel = Double(currentCapacity) / Double(maxCapacity) * 100.0
-                    self.isCharging = isCharging
+                } else {
+                    self.currentBatteryLevel = 0 // Or some other default/error state
                 }
+                self.isCharging = isCharging
+                // Assuming we only care about the first relevant power source, we can break.
+                // If multiple batteries are possible and need aggregation, this logic would need to change.
+                break
             }
         }
     }
