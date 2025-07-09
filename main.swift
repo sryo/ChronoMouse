@@ -58,8 +58,33 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let radius: CGFloat = 30.0
     var optionKeyDown: Bool = false
     var batteryBarView: BatteryBarView!
+    var settingsWC: SettingsWindowController?
+
+    @objc func handleShowSettingsNotification(_ notification: Notification) {
+        print("Show Settings Notification Received!")
+        if settingsWC == nil {
+            settingsWC = SettingsWindowController()
+            // Optional: Set up a closure or delegate to nil settingsWC when its window closes,
+            // if we want it to be deallocated and recreated each time.
+            // For now, it will persist once created.
+        }
+
+        // Ensure the app is active to bring the window to the front properly
+        NSApp.activate(ignoringOtherApps: true)
+        settingsWC?.showWindow(self)
+        settingsWC?.window?.makeKeyAndOrderFront(nil) // Bring to front
+    }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        // Register for the distributed notification if this is the primary instance
+        DistributedNotificationCenter.default().addObserver(
+            self,
+            selector: #selector(handleShowSettingsNotification(_:)),
+            name: showSettingsNotificationName, // Use the file-local global constant
+            object: Bundle.main.bundleIdentifier, // Only observe notifications from this app.
+            suspensionBehavior: .deliverImmediately
+        )
+
         NSApp.setActivationPolicy(.accessory)
         window = MouseTracker(contentRect: NSRect(x: 0, y: 0, width: 30, height: 40), styleMask: .borderless, backing: .buffered, defer: false)
         textView = NSTextView(frame: NSRect(x: 0, y: 0, width: 40, height: 20))
@@ -182,7 +207,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 }
 
-let delegate = AppDelegate()
-let application = NSApplication.shared
-application.delegate = delegate
-_ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
+// Define a unique notification name, accessible within this file
+fileprivate let showSettingsNotificationName = Notification.Name("com.sryo.ChronoMouse.ShowSettings")
+
+// Helper function to check for other running instances
+func isAnotherInstanceRunning() -> Bool {
+    guard let bundleIdentifier = Bundle.main.bundleIdentifier else { return false }
+    let runningApps = NSRunningApplication.runningApplications(withBundleIdentifier: bundleIdentifier)
+    return runningApps.count > 1 // Current app is one, so > 1 means another is running
+}
+
+// Entry point
+_ = NSApplication.shared // Ensure NSApp is initialized
+
+if isAnotherInstanceRunning() {
+    // Another instance is running, post notification and terminate
+    DistributedNotificationCenter.default().postNotificationName(showSettingsNotificationName, object: Bundle.main.bundleIdentifier, userInfo: nil, deliverImmediately: true)
+    NSApp.terminate(nil) // NSApp should be valid now
+} else {
+    // This is the first instance
+    let delegate = AppDelegate()
+    let application = NSApplication.shared
+    application.delegate = delegate
+    // The delegate will register for notifications in applicationDidFinishLaunching
+    _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
+}
