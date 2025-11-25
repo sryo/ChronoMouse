@@ -9,27 +9,27 @@
 /* Begin PBXBuildFile section */
 		15C794EC2A7AAFF100C420FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15C794EB2A7AAFF100C420FE /* Assets.xcassets */; };
 		15C795132A7ACB2500C420FE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C795122A7ACB2500C420FE /* main.swift */; };
-		15C795202A7ADF2100C420FE /* ChronoMouse256.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C795192A7ADF2000C420FE /* ChronoMouse256.png */; };
-		15C795212A7ADF2100C420FE /* ChronoMouse128.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C7951A2A7ADF2000C420FE /* ChronoMouse128.png */; };
-		15C795222A7ADF2100C420FE /* ChronoMouse32.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C7951B2A7ADF2000C420FE /* ChronoMouse32.png */; };
-		15C795232A7ADF2100C420FE /* ChronoMouse512.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C7951C2A7ADF2000C420FE /* ChronoMouse512.png */; };
-		15C795242A7ADF2100C420FE /* ChronoMouse64.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C7951D2A7ADF2000C420FE /* ChronoMouse64.png */; };
-		15C795252A7ADF2100C420FE /* ChronoMouse1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C7951E2A7ADF2100C420FE /* ChronoMouse1024.png */; };
-		15C795262A7ADF2100C420FE /* ChronoMouse16.png in Resources */ = {isa = PBXBuildFile; fileRef = 15C7951F2A7ADF2100C420FE /* ChronoMouse16.png */; };
+		15C795152A7ACB2500C420FE /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C795142A7ACB2500C420FE /* SettingsWindowController.swift */; };
+		15C795172A7ACB2500C420FE /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C795162A7ACB2500C420FE /* AppConstants.swift */; };
+		15C795192A7ACB2500C420FE /* BatteryBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C795182A7ACB2500C420FE /* BatteryBarView.swift */; };
+		15C7951B2A7ACB2500C420FE /* MouseTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7951A2A7ACB2500C420FE /* MouseTracker.swift */; };
+		15C7951D2A7ACB2500C420FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7951C2A7ACB2500C420FE /* AppDelegate.swift */; };
+		15C7951D2A7ACB2500C420FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7951C2A7ACB2500C420FE /* AppDelegate.swift */; };
+		15C7951F2A7ACB2500C420FE /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 15C7951E2A7ACB2500C420FE /* AppIcon.icon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		15C794E42A7AAFEE00C420FE /* ChronoMouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChronoMouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		15C794EB2A7AAFF100C420FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Assets.xcassets; sourceTree = "<group>"; };
-		15C794F02A7AAFF100C420FE /* ChronoMouse.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = ChronoMouse.entitlements; path = ChronoMouse.entitlements; sourceTree = "<group>"; };
-		15C795122A7ACB2500C420FE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = main.swift; path = main.swift; sourceTree = "<group>"; };
-		15C795192A7ADF2000C420FE /* ChronoMouse256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChronoMouse256.png; sourceTree = "<group>"; };
-		15C7951A2A7ADF2000C420FE /* ChronoMouse128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChronoMouse128.png; sourceTree = "<group>"; };
-		15C7951B2A7ADF2000C420FE /* ChronoMouse32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChronoMouse32.png; sourceTree = "<group>"; };
-		15C7951C2A7ADF2000C420FE /* ChronoMouse512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChronoMouse512.png; sourceTree = "<group>"; };
-		15C7951D2A7ADF2000C420FE /* ChronoMouse64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChronoMouse64.png; sourceTree = "<group>"; };
-		15C7951E2A7ADF2100C420FE /* ChronoMouse1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChronoMouse1024.png; sourceTree = "<group>"; };
-		15C7951F2A7ADF2100C420FE /* ChronoMouse16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChronoMouse16.png; sourceTree = "<group>"; };
+		15C794EB2A7AAFF100C420FE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		15C794F02A7AAFF100C420FE /* ChronoMouse.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChronoMouse.entitlements; sourceTree = "<group>"; };
+		15C795122A7ACB2500C420FE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		15C795142A7ACB2500C420FE /* SettingsWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
+		15C795162A7ACB2500C420FE /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		15C795182A7ACB2500C420FE /* BatteryBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryBarView.swift; sourceTree = "<group>"; };
+		15C7951A2A7ACB2500C420FE /* MouseTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MouseTracker.swift; sourceTree = "<group>"; };
+		15C7951C2A7ACB2500C420FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		15C7951C2A7ACB2500C420FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		15C7951E2A7ACB2500C420FE /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,13 +47,13 @@
 			isa = PBXGroup;
 			children = (
 				15C795122A7ACB2500C420FE /* main.swift */,
-				15C7951F2A7ADF2100C420FE /* ChronoMouse16.png */,
-				15C7951B2A7ADF2000C420FE /* ChronoMouse32.png */,
-				15C7951D2A7ADF2000C420FE /* ChronoMouse64.png */,
-				15C7951A2A7ADF2000C420FE /* ChronoMouse128.png */,
-				15C795192A7ADF2000C420FE /* ChronoMouse256.png */,
-				15C7951C2A7ADF2000C420FE /* ChronoMouse512.png */,
-				15C7951E2A7ADF2100C420FE /* ChronoMouse1024.png */,
+				15C7951C2A7ACB2500C420FE /* AppDelegate.swift */,
+				15C795142A7ACB2500C420FE /* SettingsWindowController.swift */,
+				15C795162A7ACB2500C420FE /* AppConstants.swift */,
+				15C795182A7ACB2500C420FE /* BatteryBarView.swift */,
+				15C7951A2A7ACB2500C420FE /* MouseTracker.swift */,
+				15C7951A2A7ACB2500C420FE /* MouseTracker.swift */,
+				15C7951E2A7ACB2500C420FE /* AppIcon.icon */,
 				15C794EB2A7AAFF100C420FE /* Assets.xcassets */,
 				15C794F02A7AAFF100C420FE /* ChronoMouse.entitlements */,
 				15C794E52A7AAFEE00C420FE /* Products */,
@@ -126,14 +126,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15C795242A7ADF2100C420FE /* ChronoMouse64.png in Resources */,
-				15C795232A7ADF2100C420FE /* ChronoMouse512.png in Resources */,
-				15C795202A7ADF2100C420FE /* ChronoMouse256.png in Resources */,
-				15C795222A7ADF2100C420FE /* ChronoMouse32.png in Resources */,
-				15C795262A7ADF2100C420FE /* ChronoMouse16.png in Resources */,
-				15C795212A7ADF2100C420FE /* ChronoMouse128.png in Resources */,
 				15C794EC2A7AAFF100C420FE /* Assets.xcassets in Resources */,
-				15C795252A7ADF2100C420FE /* ChronoMouse1024.png in Resources */,
+				15C794EC2A7AAFF100C420FE /* Assets.xcassets in Resources */,
+				15C7951F2A7ACB2500C420FE /* AppIcon.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +140,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				15C795132A7ACB2500C420FE /* main.swift in Sources */,
+				15C7951D2A7ACB2500C420FE /* AppDelegate.swift in Sources */,
+				15C795152A7ACB2500C420FE /* SettingsWindowController.swift in Sources */,
+				15C795172A7ACB2500C420FE /* AppConstants.swift in Sources */,
+				15C795192A7ACB2500C420FE /* BatteryBarView.swift in Sources */,
+				15C7951B2A7ACB2500C420FE /* MouseTracker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +185,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -210,6 +211,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -248,6 +250,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -266,6 +269,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Release;
 		};
@@ -274,11 +278,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_ENTITLEMENTS = ChronoMouse.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -302,11 +310,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_ENTITLEMENTS = ChronoMouse.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
