@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChronoMouse - A Handy Clock for Your Cursor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f5f5f5;
+      --text-primary: #222;
+      --text-secondary: #666;
+      --accent: #4285F4;
+      --border: #e0e0e0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-primary: #1e1e1e;
+        --bg-secondary: #2a2a2a;
+        --text-primary: #f0f0f0;
+        --text-secondary: #a0a0a0;
+        --border: #3a3a3a;
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 140px 2rem 40px;
+      text-align: center;
+    }
+
+    .hero__content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .hero h2 {
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+
+    .hero__cta a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .hero__cta a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Demo Section */
+    .demo-section {
+      position: relative;
+      height: 320px;
+      background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);
+      border-radius: 16px;
+      margin: 3rem 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.5s ease;
+    }
+
+    .sky-elements {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .sun {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: #FFD700;
+      border-radius: 50%;
+      box-shadow: 0 0 40px 10px rgba(255, 215, 0, 0.4);
+      opacity: 0;
+      transition: opacity 0.5s, transform 0.5s;
+    }
+
+    .moon {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      background: #F5F5DC;
+      border-radius: 50%;
+      box-shadow: 0 0 20px 5px rgba(245, 245, 220, 0.3);
+      opacity: 0;
+      transition: opacity 0.5s, transform 0.5s;
+    }
+
+    .stars {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #fff;
+      border-radius: 50%;
+    }
+
+    .cursor-clock {
+      position: absolute;
+      pointer-events: none;
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: #fff;
+      text-shadow: 0 1px 1px #000;
+      opacity: 0;
+      transition: opacity 0.25s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .cursor-clock.visible {
+      opacity: 1;
+    }
+
+    .cursor-clock.low-battery .time-display {
+      color: #f00;
+    }
+
+    .battery-bar {
+      width: 28px;
+      height: 8px;
+      border: 1px solid #fff;
+      border-radius: 2px;
+      margin-top: 2px;
+      padding: 2px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .battery-bar.visible {
+      opacity: 1;
+    }
+
+    .battery-fill {
+      height: 100%;
+      border-radius: 1px;
+      background: #fc0;
+    }
+
+    .battery-fill.critical {
+      background: #ff3b30;
+    }
+
+    .demo-controls {
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
+      transform: translate(-50%, 50%);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      mix-blend-mode: difference;
+      padding: 8px 0;
+    }
+
+    .demo-controls input[type="range"] {
+      width: 180px;
+      height: 2px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: #fff;
+      border-radius: 1px;
+      cursor: pointer;
+    }
+
+    .demo-controls input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      background: #fff;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .demo-controls input[type="range"]::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      background: #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+    }
+
+    .low-battery-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+      font-size: 11px;
+      font-weight: 500;
+      color: #fff;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+
+    .low-battery-toggle:hover {
+      opacity: 1;
+    }
+
+    .low-battery-toggle input[type="checkbox"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 28px;
+      height: 16px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.2s;
+    }
+
+    .low-battery-toggle input[type="checkbox"]::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 12px;
+      height: 12px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+
+    .low-battery-toggle input[type="checkbox"]:checked {
+      background: #ff3b30;
+    }
+
+    .low-battery-toggle input[type="checkbox"]:checked::after {
+      transform: translateX(12px);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    .faq-section h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    details {
+      background: var(--bg-primary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    details:first-of-type {
+      border-top: 1px solid var(--border);
+    }
+
+    summary {
+      padding: 16px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: '+';
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
+
+    details[open] summary::after {
+      content: '−';
+    }
+
+    details p {
+      padding: 0 16px 16px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    details code {
+      background: var(--bg-secondary);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+      font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+    }
+
+    details a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    details a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 60px 2rem 40px;
+      text-align: center;
+    }
+
+    .footer__bottom {
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero h2 {
+        font-size: 1.1rem;
+      }
+
+      .hero {
+        padding: 100px 1rem 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <div class="hero__content">
+        <h1>ChronoMouse</h1>
+        <h2>A Handy Clock for Your Cursor</h2>
+        <div class="hero__cta">
+          <a href="https://github.com/sryo/ChronoMouse">View on GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <section class="demo-section" id="demoArea">
+      <div class="sky-elements">
+        <div class="sun" id="sun"></div>
+        <div class="moon" id="moon"></div>
+        <div class="stars" id="stars"></div>
+      </div>
+      <div class="cursor-clock" id="cursorClock">
+        <span class="time-display" id="timeDisplay">00</span>
+        <div class="battery-bar" id="batteryBar">
+          <div class="battery-fill" id="batteryFill"></div>
+        </div>
+      </div>
+      <div class="demo-controls">
+        <input type="range" id="timeSlider" min="0" max="1439" value="720">
+        <label class="low-battery-toggle">
+          <input type="checkbox" id="lowBattery">
+          <span>Low battery</span>
+        </label>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>What does ChronoMouse do?</summary>
+        <p>ChronoMouse displays a small clock that follows your mouse cursor, showing the current hour. This keeps the time always in your field of view without needing to look away from your work.</p>
+      </details>
+
+      <details>
+        <summary>How do I see the minutes?</summary>
+        <p>Hold the <code>Option (⌥)</code> key while moving your mouse to display minutes instead of hours.</p>
+      </details>
+
+      <details>
+        <summary>How do I make it start automatically?</summary>
+        <p>ChronoMouse automatically enables "Launch at Login" on first run. You can toggle this setting by launching the app again while it's already running—this opens the Settings window.</p>
+      </details>
+
+      <details>
+        <summary>Is it free?</summary>
+        <p>Yes. ChronoMouse is open source and free to use.</p>
+      </details>
+    </section>
+
+    <div class="footer">
+      <div class="footer__bottom">
+        © 2025 sryo
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const demoArea = document.getElementById('demoArea');
+    const cursorClock = document.getElementById('cursorClock');
+    const timeDisplay = document.getElementById('timeDisplay');
+    const batteryBar = document.getElementById('batteryBar');
+    const batteryFill = document.getElementById('batteryFill');
+    const lowBatteryCheckbox = document.getElementById('lowBattery');
+    const timeSlider = document.getElementById('timeSlider');
+    const sun = document.getElementById('sun');
+    const moon = document.getElementById('moon');
+    const stars = document.getElementById('stars');
+
+    // Generate stars
+    for (let i = 0; i < 30; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 60 + '%';
+      star.style.opacity = 0.3 + Math.random() * 0.7;
+      stars.appendChild(star);
+    }
+
+    // From AppConstants.swift
+    const CLOCK_RADIUS = 30;
+    const FADE_DELAY = 2000;
+
+    let fadeTimeout;
+    let isInDemo = false;
+    let simHour = 12;
+    let simMinute = 0;
+
+    function getSkyGradient(hour, minute) {
+      const time = hour + minute / 60;
+
+      // Sky colors for different times of day
+      if (time < 5) {
+        // Night
+        return 'linear-gradient(to bottom, #0a1628 0%, #1a2a4a 100%)';
+      } else if (time < 6.5) {
+        // Dawn
+        const t = (time - 5) / 1.5;
+        return `linear-gradient(to bottom,
+          rgb(${lerp(10, 255, t)}, ${lerp(22, 140, t)}, ${lerp(40, 100, t)}) 0%,
+          rgb(${lerp(26, 255, t)}, ${lerp(42, 200, t)}, ${lerp(74, 150, t)}) 50%,
+          rgb(${lerp(40, 255, t)}, ${lerp(60, 230, t)}, ${lerp(100, 180, t)}) 100%)`;
+      } else if (time < 8) {
+        // Sunrise
+        return 'linear-gradient(to bottom, #87CEEB 0%, #FFE4B5 50%, #FDB99B 100%)';
+      } else if (time < 17) {
+        // Day
+        return 'linear-gradient(to bottom, #4A90D9 0%, #87CEEB 50%, #B0E0E6 100%)';
+      } else if (time < 19) {
+        // Sunset
+        const t = (time - 17) / 2;
+        return `linear-gradient(to bottom,
+          rgb(${lerp(74, 50, t)}, ${lerp(144, 30, t)}, ${lerp(217, 80, t)}) 0%,
+          rgb(${lerp(255, 180, t)}, ${lerp(150, 80, t)}, ${lerp(100, 100, t)}) 50%,
+          rgb(${lerp(255, 255, t)}, ${lerp(180, 100, t)}, ${lerp(130, 50, t)}) 100%)`;
+      } else if (time < 21) {
+        // Dusk
+        const t = (time - 19) / 2;
+        return `linear-gradient(to bottom,
+          rgb(${lerp(50, 15, t)}, ${lerp(30, 25, t)}, ${lerp(80, 55, t)}) 0%,
+          rgb(${lerp(180, 40, t)}, ${lerp(80, 40, t)}, ${lerp(100, 80, t)}) 50%,
+          rgb(${lerp(255, 60, t)}, ${lerp(100, 50, t)}, ${lerp(50, 70, t)}) 100%)`;
+      } else {
+        // Night
+        return 'linear-gradient(to bottom, #0a1628 0%, #1a2a4a 100%)';
+      }
+    }
+
+    function lerp(a, b, t) {
+      return Math.round(a + (b - a) * t);
+    }
+
+    function updateSkyElements(hour, minute) {
+      const time = hour + minute / 60;
+      const areaWidth = demoArea.offsetWidth;
+      const areaHeight = demoArea.offsetHeight;
+
+      // Sun arc: rises at 6, peaks at 12, sets at 18
+      if (time >= 6 && time <= 18) {
+        const sunProgress = (time - 6) / 12;
+        const sunX = sunProgress * areaWidth;
+        const sunY = areaHeight * 0.8 - Math.sin(sunProgress * Math.PI) * areaHeight * 0.6;
+        sun.style.left = sunX + 'px';
+        sun.style.top = sunY + 'px';
+        sun.style.opacity = time < 7 || time > 17 ? 0.6 : 1;
+      } else {
+        sun.style.opacity = 0;
+      }
+
+      // Moon arc: rises at 19, peaks at 0, sets at 5
+      const isNight = time >= 19 || time <= 5;
+      if (isNight) {
+        const moonTime = time >= 19 ? time - 19 : time + 5;
+        const moonProgress = moonTime / 10;
+        const moonX = moonProgress * areaWidth;
+        const moonY = areaHeight * 0.7 - Math.sin(moonProgress * Math.PI) * areaHeight * 0.5;
+        moon.style.left = moonX + 'px';
+        moon.style.top = moonY + 'px';
+        moon.style.opacity = 1;
+      } else {
+        moon.style.opacity = 0;
+      }
+
+      // Stars visible at night
+      stars.style.opacity = (time >= 20 || time <= 5) ? 1 : (time >= 19 ? (time - 19) : 0);
+    }
+
+    // Match AppDelegate.swift calculateWindowPosition (adjusted for web coords)
+    function calculatePosition(minute, mouseX, mouseY) {
+      const angle = -minute * (Math.PI / 30) + (Math.PI / 2);
+      return {
+        x: mouseX + CLOCK_RADIUS * Math.cos(angle),
+        y: mouseY - CLOCK_RADIUS * Math.sin(angle)
+      };
+    }
+
+    function updateBatteryDisplay(isLowBattery) {
+      cursorClock.classList.toggle('low-battery', isLowBattery);
+      batteryBar.classList.toggle('visible', isLowBattery);
+      if (isLowBattery) {
+        batteryFill.style.width = '8%';
+        batteryFill.classList.add('critical');
+      } else {
+        batteryFill.style.width = '0%';
+        batteryFill.classList.remove('critical');
+      }
+    }
+
+    function updateClockPosition(mouseX, mouseY) {
+      const pos = calculatePosition(simMinute, mouseX, mouseY);
+      cursorClock.style.left = pos.x + 'px';
+      cursorClock.style.top = pos.y + 'px';
+      cursorClock.style.transform = 'translate(-50%, -50%)';
+    }
+
+    let lastMouseX = 0, lastMouseY = 0;
+
+    demoArea.addEventListener('mouseenter', () => {
+      isInDemo = true;
+      cursorClock.classList.add('visible');
+    });
+
+    demoArea.addEventListener('mouseleave', () => {
+      isInDemo = false;
+      cursorClock.classList.remove('visible');
+      clearTimeout(fadeTimeout);
+    });
+
+    demoArea.addEventListener('mousemove', (e) => {
+      if (!isInDemo) return;
+
+      const rect = demoArea.getBoundingClientRect();
+      lastMouseX = e.clientX - rect.left;
+      lastMouseY = e.clientY - rect.top;
+
+      updateSimulatedTime();
+      updateClockPosition(lastMouseX, lastMouseY);
+      cursorClock.classList.add('visible');
+
+      clearTimeout(fadeTimeout);
+      fadeTimeout = setTimeout(() => {
+        if (isInDemo) cursorClock.classList.remove('visible');
+      }, FADE_DELAY);
+    });
+
+    const now = new Date();
+    let virtualTime = now.getHours() * 60 + now.getMinutes();
+    let isDragging = false;
+    let lastPointerX = 0;
+
+    timeSlider.addEventListener('pointerdown', (e) => {
+      isDragging = true;
+      lastPointerX = e.clientX;
+      timeSlider.setPointerCapture(e.pointerId);
+    });
+
+    timeSlider.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      const delta = e.clientX - lastPointerX;
+      const sliderWidth = timeSlider.offsetWidth;
+      const timeChange = (delta / sliderWidth) * 1440;
+      virtualTime = (virtualTime + timeChange + 1440) % 1440;
+      timeSlider.value = Math.floor(virtualTime);
+      lastPointerX = e.clientX;
+      updateSimulatedTime();
+      if (isInDemo) {
+        updateClockPosition(lastMouseX, lastMouseY);
+      }
+    });
+
+    timeSlider.addEventListener('pointerup', () => {
+      isDragging = false;
+    });
+
+    timeSlider.addEventListener('click', () => {
+      virtualTime = parseInt(timeSlider.value);
+      updateSimulatedTime();
+      if (isInDemo) {
+        updateClockPosition(lastMouseX, lastMouseY);
+      }
+    });
+
+    function updateSimulatedTime() {
+      simHour = Math.floor(virtualTime / 60);
+      simMinute = Math.floor(virtualTime % 60);
+
+      timeDisplay.textContent = simHour.toString().padStart(2, '0');
+      demoArea.style.background = getSkyGradient(simHour, simMinute);
+      updateSkyElements(simHour, simMinute);
+    }
+
+    lowBatteryCheckbox.addEventListener('change', (e) => {
+      updateBatteryDisplay(e.target.checked);
+    });
+
+    // Initialize
+    timeSlider.value = virtualTime;
+    updateSimulatedTime();
+  </script>
+</body>
+</html>
