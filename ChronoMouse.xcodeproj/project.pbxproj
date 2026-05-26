@@ -14,8 +14,10 @@
 		15C795192A7ACB2500C420FE /* BatteryBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C795182A7ACB2500C420FE /* BatteryBarView.swift */; };
 		15C7951B2A7ACB2500C420FE /* MouseTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7951A2A7ACB2500C420FE /* MouseTracker.swift */; };
 		15C7951D2A7ACB2500C420FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7951C2A7ACB2500C420FE /* AppDelegate.swift */; };
-		15C7951D2A7ACB2500C420FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C7951C2A7ACB2500C420FE /* AppDelegate.swift */; };
 		15C7951F2A7ACB2500C420FE /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 15C7951E2A7ACB2500C420FE /* AppIcon.icon */; };
+		15C795202A7ACB2500C420FE /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C795212A7ACB2500C420FE /* Preferences.swift */; };
+		15C795222A7ACB2500C420FE /* UpdateChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C795232A7ACB2500C420FE /* UpdateChecker.swift */; };
+		15C795262A7ACB2500C420FE /* OrbitEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C795272A7ACB2500C420FE /* OrbitEditorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +30,10 @@
 		15C795182A7ACB2500C420FE /* BatteryBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatteryBarView.swift; sourceTree = "<group>"; };
 		15C7951A2A7ACB2500C420FE /* MouseTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MouseTracker.swift; sourceTree = "<group>"; };
 		15C7951C2A7ACB2500C420FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		15C7951C2A7ACB2500C420FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		15C7951E2A7ACB2500C420FE /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.icon; sourceTree = "<group>"; };
+		15C795212A7ACB2500C420FE /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		15C795232A7ACB2500C420FE /* UpdateChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateChecker.swift; sourceTree = "<group>"; };
+		15C795272A7ACB2500C420FE /* OrbitEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrbitEditorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,8 +54,10 @@
 				15C7951C2A7ACB2500C420FE /* AppDelegate.swift */,
 				15C795142A7ACB2500C420FE /* SettingsWindowController.swift */,
 				15C795162A7ACB2500C420FE /* AppConstants.swift */,
+				15C795212A7ACB2500C420FE /* Preferences.swift */,
+				15C795232A7ACB2500C420FE /* UpdateChecker.swift */,
+				15C795272A7ACB2500C420FE /* OrbitEditorView.swift */,
 				15C795182A7ACB2500C420FE /* BatteryBarView.swift */,
-				15C7951A2A7ACB2500C420FE /* MouseTracker.swift */,
 				15C7951A2A7ACB2500C420FE /* MouseTracker.swift */,
 				15C7951E2A7ACB2500C420FE /* AppIcon.icon */,
 				15C794EB2A7AAFF100C420FE /* Assets.xcassets */,
@@ -127,7 +133,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				15C794EC2A7AAFF100C420FE /* Assets.xcassets in Resources */,
-				15C794EC2A7AAFF100C420FE /* Assets.xcassets in Resources */,
 				15C7951F2A7ACB2500C420FE /* AppIcon.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,6 +148,9 @@
 				15C7951D2A7ACB2500C420FE /* AppDelegate.swift in Sources */,
 				15C795152A7ACB2500C420FE /* SettingsWindowController.swift in Sources */,
 				15C795172A7ACB2500C420FE /* AppConstants.swift in Sources */,
+				15C795202A7ACB2500C420FE /* Preferences.swift in Sources */,
+				15C795222A7ACB2500C420FE /* UpdateChecker.swift in Sources */,
+				15C795262A7ACB2500C420FE /* OrbitEditorView.swift in Sources */,
 				15C795192A7ACB2500C420FE /* BatteryBarView.swift in Sources */,
 				15C7951B2A7ACB2500C420FE /* MouseTracker.swift in Sources */,
 			);
@@ -205,7 +213,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -264,7 +272,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -285,18 +293,19 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				ENABLE_APP_SANDBOX = YES;
+				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 sryo. All rights reserved.";
 				INFOPLIST_KEY_NSMainStoryboardFile = "";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sryo.ChronoMouse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -317,18 +326,19 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				ENABLE_APP_SANDBOX = YES;
+				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 sryo. All rights reserved.";
 				INFOPLIST_KEY_NSMainStoryboardFile = "";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sryo.ChronoMouse;
 				PRODUCT_NAME = "$(TARGET_NAME)";

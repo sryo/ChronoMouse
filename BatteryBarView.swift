@@ -1,57 +1,64 @@
 import Cocoa
-import IOKit.ps
 
-// Renders the battery level indicator.
 class BatteryBarView: NSView {
     var batteryLevel: Double = 100.0
-    var isCharging: Bool = false
-    private var barShadow: NSShadow
+    var isCharging = false
+    var lowBatteryThreshold: Double = AppConstants.defaultLowBatteryThreshold
+    var isEnabled: Bool = true
 
-    override init(frame frameRect: NSRect) {
-        barShadow = NSShadow()
-        barShadow.shadowColor = NSColor.black
-        barShadow.shadowBlurRadius = 2
-        barShadow.shadowOffset = NSSize(width: 0, height: -1)
-        super.init(frame: frameRect)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    private lazy var dropShadow: NSShadow = {
+        let s = NSShadow()
+        s.shadowColor = .black
+        s.shadowBlurRadius = 2
+        s.shadowOffset = NSSize(width: 0, height: -1)
+        return s
+    }()
 
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
-        guard batteryLevel < AppConstants.lowBatteryThreshold && !isCharging else { return }
 
-        let barYPosition = bounds.height - AppConstants.batteryBarHeight - 22
-        let outerRect = NSRect(x: bounds.origin.x + AppConstants.batteryBarPadding, y: barYPosition, width: bounds.width - AppConstants.batteryBarPadding * 2, height: AppConstants.batteryBarHeight)
-        let innerRect = NSInsetRect(outerRect, 2, 2)
-        let fillWidth = CGFloat(batteryLevel / 100.0) * innerRect.width
+        guard isEnabled, batteryLevel <= lowBatteryThreshold, !isCharging else { return }
 
-        let image = NSImage(size: bounds.size)
-        image.lockFocus()
+        let outerRect = NSRect(
+            x: AppConstants.batteryBarPadding,
+            y: bounds.height - AppConstants.batteryBarHeight - AppConstants.batteryBarYOffset,
+            width: bounds.width - AppConstants.batteryBarPadding * 2,
+            height: AppConstants.batteryBarHeight
+        )
+        let innerRect = outerRect.insetBy(dx: AppConstants.batteryBarInset, dy: AppConstants.batteryBarInset)
+        let fillRect = NSRect(
+            x: innerRect.minX,
+            y: innerRect.minY,
+            width: innerRect.width * batteryLevel / 100.0,
+            height: innerRect.height
+        )
 
-        barShadow.set()
-        let outerPath = NSBezierPath(roundedRect: outerRect, xRadius: 2, yRadius: 2)
+        dropShadow.set()
+
+        let outerPath = NSBezierPath(
+            roundedRect: outerRect,
+            xRadius: AppConstants.batteryBarCornerRadius,
+            yRadius: AppConstants.batteryBarCornerRadius
+        )
         NSColor.white.setStroke()
         outerPath.lineWidth = 1.0
         outerPath.stroke()
 
-        let innerPath = NSBezierPath(roundedRect: NSRect(x: innerRect.origin.x, y: innerRect.origin.y, width: fillWidth, height: innerRect.height), xRadius: 1, yRadius: 1)
-        
-        // Dynamic Color Logic
+        let fillPath = NSBezierPath(
+            roundedRect: fillRect,
+            xRadius: AppConstants.batteryFillCornerRadius,
+            yRadius: AppConstants.batteryFillCornerRadius
+        )
+        fillColor.setFill()
+        fillPath.fill()
+    }
+
+    private var fillColor: NSColor {
         if batteryLevel < AppConstants.criticalBatteryThreshold {
-            NSColor.systemRed.setFill()
-        } else if batteryLevel < AppConstants.lowBatteryThreshold {
-            NSColor.systemYellow.setFill()
-        } else {
-            NSColor.white.setFill()
+            return .systemRed
+        } else if batteryLevel <= lowBatteryThreshold {
+            return .systemYellow
         }
-        
-        innerPath.fill()
-
-        image.unlockFocus()
-
-        image.draw(at: .zero, from: bounds, operation: .copy, fraction: 1.0)
+        return .white
     }
 }
